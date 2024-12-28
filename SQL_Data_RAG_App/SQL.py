@@ -43,8 +43,6 @@ print(f"Connection URI: {connection_uri}")
 # Connect to the database
 db = SQLDatabase.from_uri(connection_uri, sample_rows_in_table_info=2)
 
-# Step 3: Define BaseCache for SQLDatabaseChain
-
 
 # Step 4: Rebuild SQLDatabaseChain
 SQLDatabaseChain.model_rebuild()
