@@ -1,0 +1,6 @@
+langchain
+langchain-community
+openai
+langchain-text-splitters
+langchain-openai
+unstructured
