@@ -8,7 +8,7 @@ import streamlit as st
 import kagglehub
 
 def main():
-    load_dotenv()
+    #load_dotenv()
     df = pd.read_csv("WA_Fn-UseC_-HR-Employee-Attrition.csv")
 
     st.set_page_config(
