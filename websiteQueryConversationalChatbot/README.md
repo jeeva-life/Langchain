@@ -1,3 +1,5 @@
+Project Instructor
+This project is a culmination of everything I’ve learned from the LangChain AI Development Series by Manas Das Gupta, whose insightful teaching and guidance were instrumental in bringing this idea to life.
 HR Conversational Chatbot
 Project Overview
 The HR Conversational Chatbot is an intelligent application designed to assist employees in retrieving information about HR policies and practices. By providing a natural language interface, employees can look up HR-related information quickly and efficiently, making it a valuable tool for organizations aiming to improve employee engagement and streamline policy inquiries.
