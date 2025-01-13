@@ -3,7 +3,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_openai import OpenAI
 from langchain.chains.summarize import load_summarize_chain
 from cvsummarizer import process_docx, process_pdf
-
+import os
 
 def main():
     st.title("CV Summary Generator")
@@ -18,13 +18,30 @@ def main():
         st.write(f"File Name: {uploaded_file.name}")
         st.write(f"File Type: {file_extension}")
 
-        if file_extension == "docx":
-            text = process_docx(uploaded_file.name)
-        elif file_extension == "pdf":
-            text = process_pdf(uploaded_file.name)
-        else:
-            st.error("Unsupported file format. Please upload a .docx or .pdf file.")
-            return
+        # Save uploaded file temporarily
+        temp_file_path = f"temp_uploaded_file.{file_extension}"
+        with open(temp_file_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+
+        try:
+            if file_extension == "docx":
+                text = process_docx(temp_file_path)
+            elif file_extension == "pdf":
+                text = process_pdf(temp_file_path)
+            else:
+                st.error("Unsupported file format. Please upload a .docx or .pdf file.")
+                return
+
+            st.success("File processed successfully!")
+            st.write(f"Extracted Text: {text[:500]}...")  # Show the first 500 characters of the text
+
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
+
+        finally:
+            #cleanup temporary file
+            if os.path.exists(temp_file_path):
+                os.remove(temp_file_path)
 
         llm = OpenAI(temperature=0)
         prompt_template = """You have been given a Resume to analyze.
@@ -62,6 +79,7 @@ def main():
 
         st.write("Resume Summary:")
         st.text_area("Text", result['output_text'], height=450)
+
 
 if __name__ == "__main__":
     main()

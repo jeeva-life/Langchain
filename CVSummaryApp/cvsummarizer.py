@@ -9,20 +9,23 @@ from langchain.text_splitter import CharacterTextSplitter
 import textwrap
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 import streamlit as st
+
 
 def process_docx(docx_file):
     # Add your docx processing code here
     text = ""
     # Docx2txtLoader loads the document
     loader = Docx2txtLoader(docx_file)
-    
+
     # Load documents and split into chunks
     text = loader.load_and_split()
-    
+
     return text
+
 
 def process_pdf(pdf_file):
     text = ""
@@ -47,4 +50,3 @@ def process_pdf(pdf_file):
     print(len(texts))
 
     return texts
-
