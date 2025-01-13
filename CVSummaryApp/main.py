@@ -33,7 +33,7 @@ def main():
                 return
 
             st.success("File processed successfully!")
-            st.write(f"Extracted Text: {text[:500]}...")  # Show the first 500 characters of the text
+            st.write(f"Extracted Text: {text[:100]}...")  # Show the first 500 characters of the text
 
         except Exception as e:
             st.error(f"An error occurred: {e}")
@@ -71,9 +71,7 @@ def main():
             chain_type="refine",
             question_prompt=prompt,
             refine_prompt=refine_prompt,
-            refine_intermediate_steps=True,
-            input_keys="input_documents",
-            output_keys="output_text",
+            verbose=True
         )
         result = chain({"input_documents": text}, return_only_outputs=True)
 
